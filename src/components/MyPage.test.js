@@ -27,3 +27,30 @@ test("유저가 잘못들어가면 보여지는 예제.", () => {
     expect(btnEl).toBeInTheDocument();
     expect(btnEl).toHaveTextContent("로그인");  
 })
+
+test("제목이 있다", () => {
+    render(<MyPage />);
+    const titleEl = screen.getByRole('heading', {
+        level: 2
+    });
+    expect(titleEl).toBeInTheDocument();
+})
+
+test("label input", () => {
+    render(<MyPage />);
+    const inputEl = screen.getByRole('textbox', {
+        name: '자기소개'
+    })
+    expect(inputEl).toBeInTheDocument();
+
+    const inputEl1 = screen.getByLabelText('자기소개', {
+        selector:'textarea'
+    });
+    expect(inputEl1).toBeInTheDocument();
+
+    const inputEl2 = screen.getByDisplayValue('tom');
+    expect(inputEl2).toBeInTheDocument();
+
+    const inputEl3 = screen.getByTestId('mydiv');
+    expect(inputEl3).toBeInTheDocument();
+})
